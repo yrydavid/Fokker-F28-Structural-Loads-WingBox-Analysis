@@ -204,7 +204,15 @@ $$\sigma_{\text{cr}} = \frac{k_\sigma \pi^2 E}{12(1 - \nu^2)} \left(\frac{\delta
 2. Open MATLAB in the repository root directory and run any of the 11 scripts to generate the aerodynamic profiles, fuselage maneuver load distributions, or spanwise wing effort diagrams.
 
 ---
+## Academic Context
 
+This framework was developed within the **Faculty of Aerospace Engineering** at **National University of Science and Technology POLITEHNICA Bucharest** (Specialization: *Aerospace Construction*), integrating coursework methodologies from:
+* **Aeronautical Structures & Computational Models** (*Structuri de Aviație și Modele de Calcul – SAvMC*)
+* **Aircraft Structural Design & Sizing** (*Construcția Structurilor Aerospațiale*)
+* **Structural Stability & Post-Buckling Analysis** (*Stabilitatea Structurilor de Aviație – SSAv*)
+* **Flight Loads & Airworthiness Standards** (*FAR/CS-25 Regulatory Basis*)
+  
+---
 ## Author & Contact
 
 **David Irinei**  
