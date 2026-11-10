@@ -75,11 +75,11 @@ The reference study considers modified symmetric profiles at the wing and vertic
 
 The associated coursework also applies approximate subsonic compressibility corrections. The resulting lift-curve slopes reported in the study are:
 
-\[
+$$
 C_{L_\alpha,\mathrm{wing}}=5.71\ \mathrm{rad}^{-1},\qquad
 C_{L_\alpha,\mathrm{HTP}}=4.12\ \mathrm{rad}^{-1},\qquad
 C_{L_\alpha,\mathrm{VTP}}=3.67\ \mathrm{rad}^{-1}.
-\]
+$$
 
 <p align="center">
   <img src="figures/airfoil_wing_root_naca0014.png" width="32%" alt="Approximate wing-root section">
@@ -99,10 +99,10 @@ The aircraft study includes a maneuver and gust-load assessment as well as presc
 
 For the prescribed elevator case, the local longitudinal load factor is evaluated as
 
-\[
+$$
 n^\pm(x')=1+\frac{\Delta P_{\mathrm{HTP}}^\pm}{G}
 \left(1+\frac{L_{\mathrm{HTP}}(x'-x_{\mathrm{CG}})}{r_y^2}\right).
-\]
+$$
 
 The coursework uses elevator deflections of +25° and −20° at 116.92 m/s, giving incremental horizontal-tailplane loads of approximately **+84.06 kN** and **−67.26 kN**. A separate checked-maneuver exercise evaluates the longitudinal distribution using a prescribed pitch acceleration of **0.4276 rad/s²**.
 
@@ -116,14 +116,14 @@ Rudder and landing-load cases are also included in the written study. The publis
 
 ## 3. Spanwise wing loads and internal efforts
 
-The wing study uses a Diederich-type spanwise lift approximation with coefficients \(C_1=0.50\), \(C_2=0.16\), and \(C_3=0.38\). For the reference maneuver calculation, the reported total lift is **827.65 kN**.
+The wing study uses a Diederich-type spanwise lift approximation with coefficients $C_1=0.50$, $C_2=0.16$, and $C_3=0.38$. For the reference maneuver calculation, the reported total lift is **827.65 kN**.
 
-\[
+$$
 L_a(\eta)=C_1\frac{c(\eta)}{\overline c_g}
 +C_2\frac{4}{\pi}\sqrt{1-\eta^2}
 +C_3 f(\eta),\qquad
 p_a(y)=\frac{P_a}{2b}L_a(y/b).
-\]
+$$
 
 The wing is divided into intervals at **1.65 m**, **3.20 m**, and **8.50 m** along the semi-span to evaluate the analytical expressions for shear force, bending moment, and torsion, including the prescribed changes at the concentrated-load station.
 
@@ -172,14 +172,14 @@ Representative sizing results from the coursework include:
 
 For plate stability, the study uses the classical elastic stress expressions
 
-\[
+$$
 \sigma_{\mathrm{cr}}=
 \frac{k_\sigma\pi^2E}{12(1-\nu^2)}
 \left(\frac{t}{b}\right)^2,\qquad
 \tau_{\mathrm{cr}}=
 \frac{k_\tau\pi^2E}{12(1-\nu^2)}
 \left(\frac{t}{b}\right)^2.
-\]
+$$
 
 The resulting coursework comparisons are:
 
