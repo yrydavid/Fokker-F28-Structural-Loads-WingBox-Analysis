@@ -1,5 +1,5 @@
 % Script MATLAB pentru generarea diagramei momentului de torsiune repartizat mt(y)
-% Avion de calcul: Fokker F28 Mk4000
+% Model aircraft: Fokker F28 Mk4000. Region labels are coursework intervals.
 clear; clc; close all;
 
 % Definire constante geometrice si masice globale
@@ -65,16 +65,16 @@ plot([3.20 3.20], [min(mt)-500 max(mt)+500], 'k--', 'LineWidth', 1);
 plot([8.50 8.50], [min(mt)-500 max(mt)+500], 'k--', 'LineWidth', 1);
 
 % Adaugare texte explicative pentru regiuni
-text(0.3, max(mt)-200, 'Fuzelaj', 'FontSize', 9, 'FontWeight', 'bold');
-text(2.0, max(mt)-200, 'Motor', 'FontSize', 9, 'FontWeight', 'bold');
-text(5.0, max(mt)-200, 'Caseta Combustibil', 'FontSize', 9, 'FontWeight', 'bold');
-text(10.0, max(mt)-200, 'Varf Aripa', 'FontSize', 9, 'FontWeight', 'bold');
+text(0.3, max(mt)-200, 'Wing carry-through', 'FontSize', 9, 'FontWeight', 'bold');
+text(2.0, max(mt)-200, 'Inboard wing bay', 'FontSize', 9, 'FontWeight', 'bold');
+text(5.0, max(mt)-200, 'Fuel bay', 'FontSize', 9, 'FontWeight', 'bold');
+text(10.0, max(mt)-200, 'Outboard wing', 'FontSize', 9, 'FontWeight', 'bold');
 
 % Configurare estetica axelor
 grid on; grid minor;
-xlabel('Pozitia pe anvergura aripii y [m]', 'FontSize', 11, 'FontWeight', 'bold');
-ylabel('Momentul de torsiune repartizat m_t [Nm/m]', 'FontSize', 11, 'FontWeight', 'bold');
-title('Variatia momentului de torsiune distribuit m_t(y) - Fokker F28', 'FontSize', 12, 'FontWeight', 'bold');
+xlabel('Semi-span station y [m]', 'FontSize', 11, 'FontWeight', 'bold');
+ylabel('Distributed torsion m_t [Nm/m]', 'FontSize', 11, 'FontWeight', 'bold');
+title('Fokker F28 - distributed torsion (coursework model)', 'FontSize', 12, 'FontWeight', 'bold');
 xlim([0 13]);
 ylim([min(mt)-400 max(mt)+400]);
 

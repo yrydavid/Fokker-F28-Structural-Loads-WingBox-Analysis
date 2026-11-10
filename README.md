@@ -46,7 +46,7 @@ Each script can be opened and run separately from the repository root in MATLAB.
 | **generarea_diagramei_momentului_incovoietor_Mxy.m** | Piecewise analytical bending-moment distribution |
 | **generarea_diagramei_momentului_de_torsiune_repartizat_mty.m** | Distributed torsional moment used in the coursework model |
 | **diagrama_momentului_de_torsiune_Mty.m** | Piecewise analytical torsion-moment distribution |
-| **figures/** | Eleven figures exported from the MATLAB coursework |
+| **figures/** | Eleven plots, including updated load and torsion diagrams |
 | **README.md** | Overview of the study and selected results |
 
 ## 1. Mass estimates and aerodynamic reference calculations
@@ -116,13 +116,16 @@ Rudder and landing-load cases are also included in the written study. The publis
 
 ## 3. Spanwise wing loads and internal efforts
 
-The wing study uses a Diederich-type spanwise lift approximation with coefficients $C_1=0.50$, $C_2=0.16$, and $C_3=0.38$. For the reference maneuver calculation, the reported total lift is **827.65 kN**.
+The wing-load illustration uses a Diederich-type approximation with coursework coefficients $C_1=0.50$, $C_2=0.16$, and $C_3=0.38$. With the simplified shape functions used in the MATLAB script, the raw distribution integrates to approximately **1.0331**. The script therefore normalizes it before applying the prescribed total lift of **827.65 kN**. See [Diederich, NACA TN 2751 (1952)](https://ntrs.nasa.gov/citations/19930083506) for the original method.
 
 $$
-L_a(\eta)=C_1\frac{c(\eta)}{\overline c_g}
-+C_2\frac{4}{\pi}\sqrt{1-\eta^2}
-+C_3 f(\eta),\qquad
-p_a(y)=\frac{P_a}{2b}L_a(y/b).
+\begin{aligned}
+\widetilde L_a(\eta)&=C_1\frac{c(\eta)}{\overline c_g}
++C_2\frac{4}{\pi}\sqrt{1-\eta^2}+C_3f(\eta),\\
+L_a(\eta)&=\frac{\widetilde L_a(\eta)}
+{\int_0^1\widetilde L_a(u)\,du},\\
+p_a(y)&=\frac{P_a}{2b}L_a(y/b).
+\end{aligned}
 $$
 
 The wing is divided into intervals at **1.65 m**, **3.20 m**, and **8.50 m** along the semi-span to evaluate the analytical expressions for shear force, bending moment, and torsion, including the prescribed changes at the concentrated-load station.
@@ -130,19 +133,21 @@ The wing is divided into intervals at **1.65 m**, **3.20 m**, and **8.50 m** alo
 The distributed-load illustration and the piecewise internal-effort scripts use simplified coursework representations rather than one shared parameterized load solver. In particular, the concentrated-load terms in the wing study are modeling assumptions; the F28's engines are mounted on the rear fuselage, not on the wing.
 
 <p align="center">
-  <img src="figures/wing_distributed_loads.png" width="680" alt="Distributed lift and mass-related loading">
+  <img src="figures/wing_distributed_loads_normalized.svg" width="680" alt="Distributed lift and mass-related loading">
 </p>
 
 ### Selected values from the internal-effort diagrams
+
+Shear and bending results are retained from the original coursework. The torsion values are recomputed from the stated distributed loads, with continuous conditions at 8.50 m and 1.65 m and a 9.01 kNm point couple at 3.20 m.
 
 | Semi-span station [m] | Shear [kN] | Bending moment [kNm] | Torsion moment [kNm] |
 | :--- | ---: | ---: | ---: |
 | 12.54 — tip | 0.00 | 0.00 | 0.00 |
 | 8.50 | 92.48 | 161.51 | 18.89 |
-| 3.20 — outboard side | 243.07 | 1,033.39 | 183.37 |
-| 3.20 — inboard side | 173.60 | 1,033.39 | 192.39 |
-| 1.65 — wing/fuselage junction | 223.02 | 1,340.61 | 210.89 |
-| 0.00 — aircraft centerline in the idealized model | 286.97 | 1,761.29 | 231.02 |
+| 3.20 — outboard side | 243.07 | 1,033.39 | 76.65 |
+| 3.20 — inboard side | 173.60 | 1,033.39 | 85.67 |
+| 1.65 — wing/fuselage junction | 223.02 | 1,340.61 | 106.12 |
+| 0.00 — aircraft centerline in the idealized model | 286.97 | 1,761.29 | 126.25 |
 
 <p align="center">
   <img src="figures/wing_shear_force_Tz.png" width="48%" alt="Spanwise shear-force distribution">
@@ -150,8 +155,8 @@ The distributed-load illustration and the piecewise internal-effort scripts use 
 </p>
 
 <p align="center">
-  <img src="figures/wing_distributed_torque_mt.png" width="48%" alt="Distributed torsional loading">
-  <img src="figures/wing_torsion_moment_Mt.png" width="48%" alt="Spanwise torsion-moment distribution">
+  <img src="figures/wing_distributed_torque_mt_recomputed.svg" width="48%" alt="Distributed torsional loading">
+  <img src="figures/wing_torsion_moment_Mt_recomputed.svg" width="48%" alt="Spanwise torsion-moment distribution">
 </p>
 
 ## 4. Preliminary wing-box sizing and elastic stability
@@ -192,13 +197,13 @@ The resulting coursework comparisons are:
 
 These are analytical estimates for the assumed geometry, loads, material properties, and boundary conditions. They are not finite-element results or an aircraft-level structural substantiation.
 
-**Load-case note.** The torsion diagram above reaches **231.02 kNm** at the inboard model station. The separate preliminary sizing calculation in the original coursework uses **124.30 kNm** as its limit torsion input (186.44 kNm after a factor of 1.5). Those inputs have not been reconciled into one governing load envelope, so the sizing results should be read as preliminary exercises rather than verification against the full plotted torsion distribution.
+**Sizing comparison.** Preliminary sizing in the original coursework uses a reference limit torque of **124.30 kNm** (186.44 kNm ultimate). Integration of the stated distributed load model gives **126.25 kNm** at the inboard station, a difference of about **1.6%**. The original flange and web sizes have not been recalculated for this updated input.
 
 ## Running the scripts
 
 Clone or download the repository, open its root folder in MATLAB, and run any of the eleven scripts individually. Each script produces the relevant figure or set of figures; not every script automatically exports a PNG.
 
-The figures retain their original Romanian labels because they were prepared for coursework at POLITEHNICA Bucharest. The main quantities are explained in English here: *forța tăietoare* means shear force, *moment încovoietor* means bending moment, *moment de torsiune* means torsion moment, and *sarcini aerodinamice și masice* means aerodynamic and mass-related loads.
+Some original figures retain their Romanian labels from coursework at POLITEHNICA Bucharest. The updated load and torsion charts are in English. The main quantities are explained here: *forța tăietoare* means shear force, *moment încovoietor* means bending moment, *moment de torsiune* means torsion moment, and *sarcini aerodinamice și masice* means aerodynamic and mass-related loads.
 
 ## Academic context
 

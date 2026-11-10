@@ -25,7 +25,12 @@ c_y = 4.70 - 0.2473 * y; % Legea corzilor pentru aripa ta [m]
 f_eta = 1.25 * sqrt(1 - eta.^2); 
 
 % Repartitia adimensională a portanței L_a(eta)
-L_a = C1 * (c_y / CMG) + C2 * (4 / pi) * sqrt(1 - eta.^2) + C3 * f_eta;
+L_raw = C1 * (c_y / CMG) + C2 * (4 / pi) * sqrt(1 - eta.^2) + C3 * f_eta;
+% Normalize the approximate shape so the integrated lift equals P_a.
+normalization = trapz(eta, L_raw);
+assert(isfinite(normalization) && normalization > 0, ...
+    'Invalid lift-distribution normalization.');
+L_a = L_raw / normalization;
 
 %% 4. Calculul Forțelor Repartizate [N/m] (Varianta Continuă)
 % Forța aerodinamică normală distribuită p_a(y)
